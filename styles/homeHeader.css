@@ -1,0 +1,20 @@
+
+
+
+.homeheader{
+    display:grid;
+    grid-template-columns:1fr min(1800px, 98%) 1fr;
+    height:60px;
+}
+
+.homeheader-heading {
+    grid-column: 2 /3;
+    grid-row:1/2;
+    width:fit-content;
+    height:fit-content;
+    margin-block:auto;
+    margin-inline:unset;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--darker-blue);
+}
