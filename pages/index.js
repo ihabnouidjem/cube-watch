@@ -9,7 +9,7 @@ import HomeStories from "../components/HomeStories";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({ storiesList, productsList }) {
   return (
     <>
       <Head>
@@ -21,10 +21,25 @@ export default function Home() {
       <main>
         <Banner />
         <HomeHeader heading={"COLLECTION"} />
-        <WatchRow />
-        <HomeHeader heading={"STORIES"} />
-        <HomeStories />
+        <WatchRow productsList={productsList} />
+        {/* <HomeHeader heading={"STORIES"} />
+        <HomeStories storiesList={storiesList} /> */}
       </main>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const storiesReq = await fetch("http://localhost:3000/api/stories");
+  const storiesList = await storiesReq.json();
+
+  const productsReq = await fetch("http://localhost:3000/api/products");
+  const productsList = await productsReq.json();
+
+  return {
+    props: {
+      storiesList: storiesList,
+      productsList: productsList,
+    },
+  };
 }

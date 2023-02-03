@@ -5,6 +5,11 @@
   --light-blue: #778da9;
   --white: #f0f8d9;
   --black: rgb(30,30,30);
+  --grey: rgb(180,180,180);
+  --pink: rgb(255, 100, 100);
+  --light-green: rgb(150, 255, 150);
+  --red: rgb(160, 20, 20);
+  --green: rgb(20, 140, 20);
 }
 
 body {
@@ -13,9 +18,14 @@ body {
   box-sizing: border-box;
   margin:0;
   padding:0;
+  min-height: 100vh;
 }
 
-
+.page {
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
 
 a {
   text-decoration: none;
@@ -27,13 +37,15 @@ p{
 }
 
 input,
-button{
+button,
+textarea{
   border:none;
   outline:none;
 }
 
 input:focus,
-button:focus{
+button:focus,
+textarea:focus{
   border:none;
   outline:none!important;
 }
@@ -60,4 +72,25 @@ button:focus{
     display:flex;
     align-items:center;
     justify-content: center;
+  }
+
+  .empty-input {
+    border:2px solid var(--pink);
+  }
+  
+  .grey-input {
+    border:2px solid var(--grey);
+  }
+
+  /* media queries */
+
+  @media only screen and (max-width:600px) {
+    .big-icon{
+      height:30px;
+      font-size: 26px;
+    }
+    .small-icon{
+      height:24px;
+      font-size: 18px;
+    }
   }

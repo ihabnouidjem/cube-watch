@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Header from "../components/Header";
+import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import "../styles/globals.css";
 import "../styles/Header.css";
@@ -9,9 +12,8 @@ import "../styles/homestories.css";
 import "../styles/footer.css";
 import "../styles/products.css";
 import "../styles/nav.css";
-import Nav from "../components/Nav";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import "../styles/admin.css";
+import "../styles/productPage.css";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -21,7 +23,11 @@ export default function App({ Component, pageProps }) {
 
   // useEffect section --------------------------------------------------
   useEffect(() => {
-    setCurrentPage(router.pathname);
+    if (router.pathname == "/products/[productId]") {
+      setCurrentPage("/products/..");
+    } else {
+      setCurrentPage(router.pathname);
+    }
   }, [router.pathname]);
 
   useEffect(() => {
@@ -48,8 +54,12 @@ export default function App({ Component, pageProps }) {
   };
 
   return (
-    <>
-      <Header changeNavbarStatus={changeNavbarStatus} />
+    <main className="page">
+      <Header
+        currentPage={currentPage}
+        changeNavbarStatus={changeNavbarStatus}
+        navbarStatus={navbarStatus}
+      />
       <Nav
         changeNavbarFreeze={changeNavbarFreeze}
         navbarStatus={navbarStatus}
@@ -57,6 +67,6 @@ export default function App({ Component, pageProps }) {
       />
       <Component {...pageProps} />
       <Footer />
-    </>
+    </main>
   );
 }

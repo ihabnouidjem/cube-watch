@@ -61,3 +61,14 @@
 .banner-text-container div:hover p{
     margin-left:50px;
 }
+
+@media only screen and (max-width:600px) {
+    .banner {
+        display:grid;
+        grid-template-rows: 500px;
+        height:500px;
+        width: min(1800px, 98%);
+        margin-top:70px;
+        box-shadow:0 0 3px var(--blue);
+    }
+}

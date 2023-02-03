@@ -1,23 +1,15 @@
 import Image from "next/image";
-import { CgChevronLeftR, CgChevronRightR } from "react-icons/cg";
-import img1 from "../public/images.jpeg";
-import img2 from "../public/images (1).jpeg";
-import img3 from "../public/images (2).jpeg";
-import img4 from "../public/images.webp";
-import img5 from "../public/images.jpg";
-
-const watchList = [
-  { id: 1, url: "../public/images.jpeg", img: img1 },
-  { id: 2, url: "../public/images(1).jpeg", img: img2 },
-  { id: 3, url: "../public/images(2).jpeg", img: img3 },
-  { id: 4, url: "../public/images.webp", img: img4 },
-  { id: 5, url: "../public/images.jpg", img: img5 },
-];
-// for (i=0;i<watchList.length;i++){
-//     import images[i] from `$[watchList[i].url]`;
-// }
-
-function WatchRow() {
+import { useRouter } from "next/router";
+import {
+  CgArrowLongRight,
+  CgChevronLeftR,
+  CgChevronRightR,
+} from "react-icons/cg";
+function WatchRow({ productsList }) {
+  const router = useRouter();
+  const routeToProduct = (folder) => {
+    router.push(`/products/${folder}`);
+  };
   return (
     <div className="watchrow">
       <div className="watchrow-scroll-left">
@@ -31,10 +23,30 @@ function WatchRow() {
         </i>
       </div>
       <div className="watchrow-slider">
-        {watchList.map(({ id, url, img }) => {
+        {productsList.map(({ _id, folder, src, company, description }) => {
           return (
-            <div className="watchrow-image-container" key={id}>
-              <Image src={img} width={500} height={500} alt={url} />
+            <div key={_id} className="watchrow-watch-container">
+              <div className="watchrow-image-container">
+                <Image
+                  src={`/products/${src}`}
+                  width={500}
+                  height={500}
+                  alt={src}
+                />
+              </div>
+              <div className="watchrow-info">
+                <h3 className="watchrow-info-header">{company}</h3>
+                <p className="watchrow-info-description">{description}</p>
+                <button
+                  className="watchrow-button"
+                  onClick={() => routeToProduct(folder)}
+                >
+                  <p>view more</p>
+                  <i className="small-icon">
+                    <CgArrowLongRight />
+                  </i>
+                </button>
+              </div>
             </div>
           );
         })}

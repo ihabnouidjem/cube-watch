@@ -1,24 +1,35 @@
 import Image from "next/image";
-import img from "../public/images.jpeg";
+// import img from "../public/images.jpeg";
 import { CgArrowLongRight } from "react-icons/cg";
 import { BsFillCartFill } from "react-icons/bs";
+import { useRouter } from "next/router";
 
-function Product() {
+function Product({ product }) {
+  const { folder, src, company, description, name, price } = product;
+  const router = useRouter();
+  const routeToProduct = () => {
+    router.push(`/products/${folder}`);
+  };
   return (
     <div className="product">
       <div className="product-img">
-        <Image src={img} alt="product" width={500} height={500} />
+        <Image
+          src={`/products/${src}`}
+          alt={"product"}
+          width={500}
+          height={500}
+        />
       </div>
       <div className="product-info">
-        <h3 className="product-header">{"richard mille"}</h3>
+        <h3 className="product-header">{company}</h3>
         <div className="product-details">
-          <p className="product-details-name">{"rm 038"}</p>
-          <p className="product-details-props">{"Homme . Automatique"}</p>
-          <p className="product-details-price">{"250k $"}</p>
+          <p className="product-details-name">{name}</p>
+          <p className="product-details-props">{description}</p>
+          <p className="product-details-price">{`${price} $`}</p>
         </div>
       </div>
       <div className="product-buttons">
-        <button className="product-button">
+        <button className="product-button" onClick={routeToProduct}>
           <p>view more</p>
           <i className="small-icon">
             <CgArrowLongRight />
